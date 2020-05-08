@@ -1,0 +1,6 @@
+cli/bin/*
+cli/obj/*
+tests/bin/*
+tests/obj/*
+treasurechest/bin/*
+treasurechest/obj/*
