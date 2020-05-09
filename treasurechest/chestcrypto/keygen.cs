@@ -28,10 +28,13 @@ namespace chestcrypto{
             Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
             return bytes;
         }
-        public static byte[] generate(){
+        public static byte[] generate()
+        {
             byte[] ed25519 = Ed25519KeyGenerator.generator();
             byte[] curve25519 = Curve25519KeyGenerator.generator();
             byte[] key = Combine(ed25519, curve25519);
+            Array.Clear(ed25519, 0, ed25519.Length);
+            Array.Clear(curve25519, 0, curve25519.Length);
             return key;
 
         }

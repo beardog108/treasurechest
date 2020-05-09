@@ -14,8 +14,11 @@ namespace tests
         [Test]
         public void TestKeyGen()
         {
-            System.Console.Write(chestcrypto.PrivateKeyGenerator.generate().Length);
-            if (chestcrypto.PrivateKeyGenerator.generate().Length != 96){
+            byte[] key = chestcrypto.PrivateKeyGenerator.generate();
+            if (key.Length != 96){
+                Assert.Fail();
+            }
+            if (key.Equals(chestcrypto.PrivateKeyGenerator.generate())){
                 Assert.Fail();
             }
             Assert.Pass();
