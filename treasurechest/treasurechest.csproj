@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MessagePack" Version="2.1.115" />
     <PackageReference Include="Sodium.Core" Version="1.2.3" />
   </ItemGroup>
 
