@@ -3,7 +3,7 @@ using chestcrypto;
 using System;
 using Sodium;
 
-namespace DoubleKeyTests
+namespace DoubleKeyPublicTests
 {
     public class Tests
     {
@@ -13,7 +13,39 @@ namespace DoubleKeyTests
         }
 
         [Test]
-        public void TestDoublePublicKey()
+        public void TestDoublePublicKeyThrowsOnBadLoad()
+        {
+            byte[] invalid = {0};
+            byte[] invalid2 = new byte[33];
+            for (int i = 0; i < invalid2.Length; i++){
+                invalid2[i] = 1;
+            }
+            bool success = false;
+            try{
+                new chestcrypto.DoublePublicKey(invalid);
+                success = true;
+            }
+            catch (chestcrypto.InvalidDoubleKeyException){
+                Console.WriteLine("Throws properly for too small array size");
+            }
+            if (success){
+                Assert.Fail();
+            }
+
+            try{
+                new chestcrypto.DoublePublicKey(invalid2);
+                success = true;
+            }
+            catch (chestcrypto.InvalidDoubleKeyException){
+                Console.WriteLine("Throws properly for too large array size");
+            }
+            if (success){
+                Assert.Fail();
+            }
+        }
+
+        [Test]
+        public void TestDoublePublicKeyLoad()
         {
             // Test that the combined key loader loads both constructors with the same results
             byte[] signingKey = PublicKeyAuth.GenerateKeyPair().PublicKey;

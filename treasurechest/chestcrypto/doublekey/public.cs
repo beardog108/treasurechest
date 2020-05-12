@@ -14,13 +14,18 @@ namespace chestcrypto{
 
 
         public DoublePublicKey(byte[] sign, byte[] encrypt){
+            // Construct double key from two separate byte arrays
+            if (sign.Length != 32 || encrypt.Length != 32){
+                throw new InvalidDoubleKeyException("Invalid length, both keys should be 32 bytes");
+            }
             signingPublicKey = sign;
             encryptPublicKey = encrypt;
         }
 
         public DoublePublicKey(byte[] joinedKey){
+            // Construct double key from one bytearray
             if (joinedKey.Length != 64){
-                throw new InvalidDoubleKeyException();
+                throw new InvalidDoubleKeyException("Invalid length, both keys should be 32 bytes");
             }
             for (int i = 0; i < joinedKey.Length; i++){
                 if (i < 32){
