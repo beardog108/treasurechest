@@ -14,10 +14,10 @@ namespace chestcrypto{
 
         public DoublePrivateKey(byte[] sign, byte[] encrypt){
             if (sign.Length != 64){
-                throw new InvalidDoubleKeyException("Signing private key must be 64 bytes in length.");
+                throw new exceptions.InvalidDoubleKeyException("Signing private key must be 64 bytes in length.");
             }
             if (encrypt.Length != 32){
-                throw new InvalidDoubleKeyException("Signing private key must be 32 bytes in length.");
+                throw new exceptions.InvalidDoubleKeyException("Signing private key must be 32 bytes in length.");
             }
             signingPrivateKey = sign;
             encryptPrivateKey = encrypt;
@@ -25,7 +25,7 @@ namespace chestcrypto{
 
         public DoublePrivateKey(byte[] combinedKey){
             if (combinedKey.Length != 96){
-                throw new InvalidDoubleKeyException("Invalid key length, must be 96 bytes in length");
+                throw new exceptions.InvalidDoubleKeyException("Invalid key length, must be 96 bytes in length");
             }
             for (int i = 0; i < combinedKey.Length; i++){
                 if (i < 64){

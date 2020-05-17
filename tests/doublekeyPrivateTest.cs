@@ -25,7 +25,7 @@ namespace DoubleKeyPrivateTests
                 new chestcrypto.DoublePrivateKey(invalid);
                 success = true;
             }
-            catch (chestcrypto.InvalidDoubleKeyException){
+            catch (chestcrypto.exceptions.InvalidDoubleKeyException){
                 Console.WriteLine("Throws properly for too small array size");
             }
             if (success){
@@ -36,7 +36,7 @@ namespace DoubleKeyPrivateTests
                 new chestcrypto.DoublePrivateKey(invalid2);
                 success = true;
             }
-            catch (chestcrypto.InvalidDoubleKeyException){
+            catch (chestcrypto.exceptions.InvalidDoubleKeyException){
                 Console.WriteLine("Throws properly for too large array size");
             }
             if (success){

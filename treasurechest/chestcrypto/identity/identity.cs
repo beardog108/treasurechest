@@ -17,7 +17,7 @@ namespace chestcrypto{
 
             }
             public Identity(DoublePublicKey publicKey){
-
+                this.publicKey = publicKey;
             }
             public Identity(DoublePrivateKey privateKey){
 
