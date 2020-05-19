@@ -22,10 +22,33 @@ namespace keyring{
             return success;
         }
 
+        private int getIdentityListPosition(Identity iden){
+            int counter = 0;
+            bool success = false;
+            identities.ForEach(delegate(Identity ident)
+            {
+                if (ident.getDoublePublicKey().Equals(iden.getDoublePublicKey())){
+                    success = true;
+                    return;
+                }
+                counter += 1;
+            });
+            if (success){
+                return counter;
+            }
+            throw new NoIdentityException();
+        }
+
         public KeyRing(string storageFile){
 
         }
         public KeyRing(){}
+
+        public int getIdentityCount(){return identities.Count;}
+
+        public int getIdentityInstance(DoublePublicKey){
+
+        }
 
         public List<byte[]> getIdentityPublicKeys(){
             List<byte[]> pubKeys = new List<byte[]>();
@@ -48,7 +71,7 @@ namespace keyring{
 
         }
 
-        public void deletePublicKey(DoublePublicKey key){
+        public void removeIdentityByPubkey(DoublePublicKey key){
 
         }
     }
