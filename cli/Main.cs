@@ -1,8 +1,9 @@
 ﻿using System;
 using CommandLine;
 using treasurechest.STDIOWrapper;
+using treasurechest;
 
-namespace treasurechest
+namespace treasurechestCLI
 {
     class Program
     {
@@ -17,15 +18,18 @@ namespace treasurechest
             bool command = true;
 
             if (opts.Version){
-                STDIO.O(Version.NAME + " - " + Version.VERSION);
+                STDIO.O(treasurechest.Version.NAME + " - " + treasurechest.Version.VERSION);
+            }
+            else if (opts.Menu){
+                new TreasureChestMenu().showMenu();
             }
             else{
                 command = false;
             }
 
             if (! command){
-                STDIO.O(Version.NAME + " - " + Version.VERSION);
-                STDIO.O("Run with help for more options");
+                STDIO.O(treasurechest.Version.NAME + " - " + treasurechest.Version.VERSION);
+                STDIO.O(new translations.Strings().HELP_TEXT);
             }
 
         }
@@ -36,6 +40,8 @@ namespace treasurechest
         public bool Interactive { get; set; }
         [Option('v', "version", Required = false, HelpText="Show current version")]
         public bool Version {get; set;}
+        [Option('m', "menu", Required = false, HelpText="Interactive CLI menu")]
+        public bool Menu {get;set;}
 
     }
 }

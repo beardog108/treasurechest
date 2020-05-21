@@ -6,10 +6,12 @@ namespace chestcrypto{
         internal class Identity {
             private DoublePrivateKey privateKey;
             private DoublePublicKey publicKey;
+            private bool hasPrivate = false;
 
             private List<EphemeralKey> ephemeralKeys = new List<EphemeralKey>();
 
             public DoublePublicKey getDoublePublicKey(){return publicKey;}
+            public DoublePrivateKey getDoublePrivateKey(){return privateKey;}
 
 
             public Identity(){}
@@ -20,7 +22,7 @@ namespace chestcrypto{
                 this.publicKey = publicKey;
             }
             public Identity(DoublePrivateKey privateKey){
-
+                this.privateKey = privateKey;
             }
             public Identity(DoublePrivateKey privateKey, List<EphemeralKey> ephemeralKeys){
 

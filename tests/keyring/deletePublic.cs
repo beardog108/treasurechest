@@ -7,7 +7,7 @@ using keyring;
 using chestcrypto;
 using chestcrypto.exceptions;
 
-namespace KeyRingTests
+namespace KeyRingDeletePublicTests
 {
     public class Tests
     {

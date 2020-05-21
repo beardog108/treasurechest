@@ -13,6 +13,23 @@ namespace DoubleKeyPrivateTests
         }
 
         [Test]
+        public void TestDoublePrivateKeyGetters()
+        {
+            byte[] signingKey = PublicKeyAuth.GenerateKeyPair().PrivateKey;
+            byte[] encryptionKey = PublicKeyBox.GenerateKeyPair().PrivateKey;
+
+            byte[] combinedKey = new byte[signingKey.Length + encryptionKey.Length];
+            Buffer.BlockCopy(signingKey, 0, combinedKey, 0, signingKey.Length);
+            Buffer.BlockCopy(encryptionKey, 0, combinedKey, signingKey.Length, encryptionKey.Length);
+
+            DoublePrivateKey combinedLoad = new chestcrypto.DoublePrivateKey(combinedKey);
+
+            Assert.AreEqual(combinedLoad.getEd25519PrivateKey(), signingKey);
+            Assert.AreEqual(combinedLoad.getCurve25519PrivateKey(), encryptionKey);
+
+        }
+
+        [Test]
         public void TestDoublePrivateKeyThrowsOnBadLoad()
         {
             byte[] invalid = {0};

@@ -9,12 +9,8 @@ namespace chestcrypto{
             private bool isPrivate;
 
             private Identity identity;
-
-            public EphemeralKey(Identity user){
-                identity = user;
-            }
             public EphemeralKey(Identity identity, byte[] key, int secondsToExpire){
-
+                
             }
 
 

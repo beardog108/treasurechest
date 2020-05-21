@@ -22,19 +22,13 @@ namespace keyring{
             return success;
         }
 
-        private int getIdentityListPosition(Identity iden){
-            int counter = 0;
-            bool success = false;
-            identities.ForEach(delegate(Identity ident)
-            {
-                if (ident.getDoublePublicKey().Equals(iden.getDoublePublicKey())){
-                    success = true;
-                    return;
+        internal void removeIdentity(Identity iden){identities.Remove(iden);}
+
+        internal Identity getIdentityInstance(DoublePublicKey key){
+            foreach (Identity iden in identities){
+                if (iden.getDoublePublicKey().Equals(key)){
+                    return iden;
                 }
-                counter += 1;
-            });
-            if (success){
-                return counter;
             }
             throw new NoIdentityException();
         }
@@ -46,9 +40,6 @@ namespace keyring{
 
         public int getIdentityCount(){return identities.Count;}
 
-        public int getIdentityInstance(DoublePublicKey){
-
-        }
 
         public List<byte[]> getIdentityPublicKeys(){
             List<byte[]> pubKeys = new List<byte[]>();
@@ -61,7 +52,6 @@ namespace keyring{
         public void addPublicKey(DoublePublicKey key){
             // Create an Identity with a public key if it does not exist already
 
-
             Identity newIdentity = new Identity(key);
             if (identityExists(newIdentity)){
                 throw new DuplicateIdentityException("An identity with that public key already exists");
@@ -71,8 +61,12 @@ namespace keyring{
 
         }
 
-        public void removeIdentityByPubkey(DoublePublicKey key){
+        public void addPrivateKey(){
+            
+        }
 
+        public void removeIdentityByPubkey(DoublePublicKey key){
+            removeIdentity(getIdentityInstance(key));
         }
     }
 
