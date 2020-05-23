@@ -1,29 +1,22 @@
 using System;
-using CommandLine;
 using treasurechest.STDIOWrapper;
-using treasurechest;
 
-namespace treasurechestCLI
-{
+namespace treasurechestCLI{
 
-    internal class TreasureChestMenu{
-
-        private string language;
-
-        public TreasureChestMenu(){
-            language = translations.GetLanguage.language;
-        }
-
-        internal void showMenu(){
-            translations.Strings strings = new translations.Strings();
-            string[] mainMenuOptions = {strings.MAIN_MENU_ENCRYPT, strings.MAIN_MENU_DECRYPT, strings.EXIT};
-            STDIO.O(strings.WELCOME);
-            int counter = 1;
+    internal class EncryptMessageInterface{
+        public static void EncryptMessage(){
             int choice = 0;
-            int mainMenuOptionsSize = mainMenuOptions.Length;
+            int counter = 1;
+            translations.Strings strings = new translations.Strings();
 
-            while (choice != mainMenuOptions.Length){
-                foreach (string option in mainMenuOptions){
+            string[] encryptMenuOptions =
+            {
+                strings.ENCRYPT_MENU_USE_PASSPHRASE,
+                strings.ENCRYPT_MENU_USE_PUBKEY,
+                strings.RETURN_TO_PREVIOUS_MENU
+            };
+            while(true){
+                foreach(string option in encryptMenuOptions){
                     STDIO.O(counter.ToString() + ". " + option);
                     counter += 1;
                 }
@@ -43,16 +36,18 @@ namespace treasurechestCLI
                 catch(System.ArgumentNullException){
                     // Can happen when stream closes (e.g. ctrl-d)
                     // since menu is intended to be directly human interfaced, user probably wants to exit
-                    choice = mainMenuOptionsSize;
+                    choice = encryptMenuOptions.Length;
                 }
-                if (choice == mainMenuOptionsSize){
+                if (choice == 1){
+                    GetMessage.getTypedMessage();
+                }
+                else if (choice == encryptMenuOptions.Length){
                     break;
                 }
-                else{
-                    STDIO.O(strings.INVALID_OPTION);
-                }
                 counter = 1;
+
             }
+
         }
 
     }

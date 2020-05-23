@@ -15,30 +15,35 @@ namespace treasurechestCLI {
             public string MAIN_MENU_DECRYPT;
             public string INVALID_OPTION;
             public string MAIN_MENU_SELECT_INTEGER;
+            public string RETURN_TO_PREVIOUS_MENU;
+            public string ENCRYPT_MENU_ENCRYPT_MESSAGE;
+            public string ENCRYPT_MENU_ENCRYPT_FILE;
+            public string ENCRYPT_MENU_USE_PASSPHRASE;
+            public string ENCRYPT_MENU_USE_PUBKEY;
+            public string ENTER_MESSAGE_UNTIL_DONE;
 
 
             public Strings(){
 
                 switch (GetLanguage.language){
                     case "es":
-                        WELCOME = treasurechest.Version.NAME + " - Protege tu valiosa información";
-                        HELP_TEXT = "Ejecuta help para más opciones";
-                        EXIT = "Salida";
-                        MAIN_MENU_ENCRYPT = "Encriptar";
-                        MAIN_MENU_DECRYPT = "Desencriptar";
-                        INVALID_OPTION = "Opción inválida";
-                        MAIN_MENU_SELECT_INTEGER = "Ingrese un número entero desde el menú";
-
+                        Spanish.load(this);
                     break;
                     case "en":
                     default:
                         WELCOME = treasurechest.Version.NAME + " - Protect your treasured information";
                         HELP_TEXT = "Run with help for more options";
-                        EXIT = "Exit";
+                        EXIT = "Exit application";
                         MAIN_MENU_ENCRYPT = "Encrypt";
                         MAIN_MENU_DECRYPT = "Decrypt";
                         INVALID_OPTION = "Invalid option";
                         MAIN_MENU_SELECT_INTEGER = "Enter an integer from the menu";
+                        RETURN_TO_PREVIOUS_MENU = "Previous menu";
+                        ENCRYPT_MENU_ENCRYPT_MESSAGE = "Encrypt text";
+                        ENCRYPT_MENU_ENCRYPT_FILE = "Encrypt file";
+                        ENCRYPT_MENU_USE_PASSPHRASE = "Use passphrase";
+                        ENCRYPT_MENU_USE_PUBKEY = "Use public key";
+                        ENTER_MESSAGE_UNTIL_DONE = "Enter your message and finish with -q on a new line.";
                     break;
                 }
 
