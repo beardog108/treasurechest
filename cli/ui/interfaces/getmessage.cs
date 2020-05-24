@@ -13,7 +13,12 @@ namespace treasurechestCLI{
             string line = "";
             STDIO.O(strings.ENTER_MESSAGE_UNTIL_DONE);
             while (true){
-                line = Console.ReadLine();
+                try{
+                    line = Console.ReadLine();
+                }
+                catch(System.ArgumentNullException){
+                    line = "-q";
+                }
                 if (line.Equals("-q")){
                     break;
                 }

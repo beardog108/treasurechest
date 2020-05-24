@@ -1,5 +1,7 @@
+using System.IO;
 using System;
 using treasurechest.STDIOWrapper;
+using getpass;
 
 namespace treasurechestCLI{
 
@@ -7,6 +9,9 @@ namespace treasurechestCLI{
         public static void EncryptMessage(){
             int choice = 0;
             int counter = 1;
+            string message;
+            string passphrase;
+
             translations.Strings strings = new translations.Strings();
 
             string[] encryptMenuOptions =
@@ -16,6 +21,7 @@ namespace treasurechestCLI{
                 strings.RETURN_TO_PREVIOUS_MENU
             };
             while(true){
+                counter = 1;
                 foreach(string option in encryptMenuOptions){
                     STDIO.O(counter.ToString() + ". " + option);
                     counter += 1;
@@ -39,12 +45,17 @@ namespace treasurechestCLI{
                     choice = encryptMenuOptions.Length;
                 }
                 if (choice == 1){
-                    GetMessage.getTypedMessage();
+                    try {
+                        message = GetMessage.getTypedMessage();
+                    }
+                    catch(System.NullReferenceException){
+                        continue;
+                    }
+                    passphrase = GetPass.getPass(strings.PASSPHRASE);
                 }
                 else if (choice == encryptMenuOptions.Length){
                     break;
                 }
-                counter = 1;
 
             }
 

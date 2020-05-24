@@ -19,6 +19,7 @@ namespace treasurechestCLI {
                 stringInst.ENCRYPT_MENU_USE_PASSPHRASE = "Usar frase de contraseña";
                 stringInst.ENCRYPT_MENU_USE_PUBKEY = "Usar clave pública";
                 stringInst.ENTER_MESSAGE_UNTIL_DONE = "Ingrese su mensaje y termine con -q en una nueva línea.";
+                stringInst.PASSPHRASE = "Frase de contraseña";
             }
 
         }

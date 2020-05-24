@@ -21,6 +21,7 @@ namespace treasurechestCLI {
             public string ENCRYPT_MENU_USE_PASSPHRASE;
             public string ENCRYPT_MENU_USE_PUBKEY;
             public string ENTER_MESSAGE_UNTIL_DONE;
+            public string PASSPHRASE;
 
 
             public Strings(){
@@ -44,6 +45,7 @@ namespace treasurechestCLI {
                         ENCRYPT_MENU_USE_PASSPHRASE = "Use passphrase";
                         ENCRYPT_MENU_USE_PUBKEY = "Use public key";
                         ENTER_MESSAGE_UNTIL_DONE = "Enter your message and finish with -q on a new line.";
+                        PASSPHRASE = "Passphrase";
                     break;
                 }
 
