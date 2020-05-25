@@ -2,6 +2,7 @@ using System.IO;
 using System;
 using treasurechest.STDIOWrapper;
 using getpass;
+using ShannonEntropyCal;
 
 namespace treasurechestCLI{
 
@@ -11,6 +12,7 @@ namespace treasurechestCLI{
             int counter = 1;
             string message;
             string passphrase;
+            string encrypted;
 
             translations.Strings strings = new translations.Strings();
 
@@ -52,6 +54,7 @@ namespace treasurechestCLI{
                         continue;
                     }
                     passphrase = GetPass.getPass(strings.PASSPHRASE);
+                    encrypted = 
                 }
                 else if (choice == encryptMenuOptions.Length){
                     break;
