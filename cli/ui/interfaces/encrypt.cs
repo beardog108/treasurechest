@@ -1,8 +1,8 @@
 using System.IO;
 using System;
+using Sodium;
 using treasurechest.STDIOWrapper;
 using getpass;
-using ShannonEntropyCal;
 
 namespace treasurechestCLI{
 
@@ -10,8 +10,8 @@ namespace treasurechestCLI{
         public static void EncryptMessage(){
             int choice = 0;
             int counter = 1;
+            byte[] key = new byte[32];
             string message;
-            string passphrase;
             string encrypted;
 
             translations.Strings strings = new translations.Strings();
@@ -53,8 +53,9 @@ namespace treasurechestCLI{
                     catch(System.NullReferenceException){
                         continue;
                     }
-                    passphrase = GetPass.getPass(strings.PASSPHRASE);
-                    encrypted = 
+                    key = SecretBox.GenerateKey();
+                    //encrypted =
+
                 }
                 else if (choice == encryptMenuOptions.Length){
                     break;
