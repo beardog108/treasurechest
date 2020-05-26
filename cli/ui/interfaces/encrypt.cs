@@ -1,8 +1,13 @@
 using System.IO;
 using System;
+using System.Text;
 using Sodium;
+using niceware;
+
+using chestcrypto.simplepack;
+using chestcrypto.symmetric;
+
 using treasurechest.STDIOWrapper;
-using getpass;
 
 namespace treasurechestCLI{
 
@@ -11,7 +16,7 @@ namespace treasurechestCLI{
             int choice = 0;
             int counter = 1;
             byte[] key = new byte[32];
-            string message;
+            byte[] message;
             string encrypted;
 
             translations.Strings strings = new translations.Strings();
@@ -48,13 +53,19 @@ namespace treasurechestCLI{
                 }
                 if (choice == 1){
                     try {
-                        message = GetMessage.getTypedMessage();
+                        message = UTF8Encoding.UTF8.GetBytes(GetMessage.getTypedMessage());
                     }
                     catch(System.NullReferenceException){
                         continue;
                     }
+
                     key = SecretBox.GenerateKey();
-                    //encrypted =
+                    encrypted = SimplePack.pack(Symmetric.encrypt(message, key));
+                    STDIO.O(encrypted);
+                    foreach (string word in Niceware.ToPassphrase(key)){
+                        Console.Write(word + " ");
+                    }
+                    STDIO.O("");
 
                 }
                 else if (choice == encryptMenuOptions.Length){

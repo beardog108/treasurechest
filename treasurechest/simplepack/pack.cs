@@ -6,8 +6,8 @@ namespace chestcrypto{
 
         public class SimplePack{
 
-            private const string header = "CHEST-MESSAGE";
-            private const string footer = "END-CHEST-MESSAGE.";
+            private const string header = "CHEST-MESSAGE ";
+            private const string footer = " END-CHEST-MESSAGE.";
 
             // Test simplepackTest.TestPackUnpackBytes
             public static string pack(byte[] data){

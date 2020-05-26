@@ -26,7 +26,6 @@ namespace DoubleKeyPublicTests
                 success = true;
             }
             catch (chestcrypto.exceptions.InvalidDoubleKeyException){
-                Console.WriteLine("Throws properly for too small array size");
             }
             if (success){
                 Assert.Fail();
@@ -37,7 +36,6 @@ namespace DoubleKeyPublicTests
                 success = true;
             }
             catch (chestcrypto.exceptions.InvalidDoubleKeyException){
-                Console.WriteLine("Throws properly for too large array size");
             }
             if (success){
                 Assert.Fail();
