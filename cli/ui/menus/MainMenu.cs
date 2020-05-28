@@ -15,7 +15,7 @@ namespace treasurechestCLI
 
         internal void showMenu(){
             translations.Strings strings = new translations.Strings();
-            string[] mainMenuOptions = {strings.MAIN_MENU_ENCRYPT, strings.MAIN_MENU_DECRYPT, strings.EXIT};
+            string[] mainMenuOptions = {strings.MAIN_MENU_ENCRYPT, strings.MAIN_MENU_DECRYPT, strings.MAIN_MENU_KEYRING, strings.EXIT};
             STDIO.O(strings.WELCOME);
             int counter = 1;
             int choice = 0;

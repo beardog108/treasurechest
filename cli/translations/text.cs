@@ -13,6 +13,7 @@ namespace treasurechestCLI {
             public string EXIT;
             public string MAIN_MENU_ENCRYPT;
             public string MAIN_MENU_DECRYPT;
+            public string MAIN_MENU_KEYRING;
             public string INVALID_OPTION;
             public string MAIN_MENU_SELECT_INTEGER;
             public string RETURN_TO_PREVIOUS_MENU;
@@ -37,12 +38,13 @@ namespace treasurechestCLI {
                         EXIT = "Exit application";
                         MAIN_MENU_ENCRYPT = "Encrypt";
                         MAIN_MENU_DECRYPT = "Decrypt";
+                        MAIN_MENU_KEYRING = "Manage contacts";
                         INVALID_OPTION = "Invalid option";
                         MAIN_MENU_SELECT_INTEGER = "Enter an integer from the menu";
                         RETURN_TO_PREVIOUS_MENU = "Previous menu";
                         ENCRYPT_MENU_ENCRYPT_MESSAGE = "Encrypt text";
                         ENCRYPT_MENU_ENCRYPT_FILE = "Encrypt file";
-                        ENCRYPT_MENU_USE_PASSPHRASE = "Use passphrase";
+                        ENCRYPT_MENU_USE_PASSPHRASE = "Use mnemonic";
                         ENCRYPT_MENU_USE_PUBKEY = "Use public key";
                         ENTER_MESSAGE_UNTIL_DONE = "Enter your message and finish with -q on a new line.";
                         PASSPHRASE = "Passphrase";

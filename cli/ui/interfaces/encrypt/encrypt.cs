@@ -4,7 +4,7 @@ using System.Text;
 using Sodium;
 using niceware;
 
-using chestcrypto.simplepack;
+using simplepack;
 using chestcrypto.symmetric;
 
 using treasurechest.STDIOWrapper;
@@ -12,12 +12,30 @@ using treasurechest.STDIOWrapper;
 namespace treasurechestCLI{
 
     internal class EncryptMessageInterface{
+        private static void EncryptWithMnemonic(){
+            byte[] key = new byte[32]; // Key has to be 32 bytes in size
+            byte[] message; // Plaintext
+            string encrypted; // Ciphertext will be encoded with SimplePack.
+            try {
+                message = UTF8Encoding.UTF8.GetBytes(GetMessage.getTypedMessage());
+            }
+            catch(System.NullReferenceException){
+                return;
+            }
+            SimplePack packer = new SimplePack("treasure chest-message ", " end treasure chest message.");
+
+            key = SecretBox.GenerateKey();
+            encrypted = packer.encode(Symmetric.encrypt(message, key));
+            STDIO.O(encrypted);
+            foreach (string word in Niceware.ToPassphrase(key)){
+                Console.Write(word + " ");
+            }
+            STDIO.O("");
+        }
+
         public static void EncryptMessage(){
             int choice = 0;
             int counter = 1;
-            byte[] key = new byte[32];
-            byte[] message;
-            string encrypted;
 
             translations.Strings strings = new translations.Strings();
 
@@ -52,23 +70,12 @@ namespace treasurechestCLI{
                     choice = encryptMenuOptions.Length;
                 }
                 if (choice == 1){
-                    try {
-                        message = UTF8Encoding.UTF8.GetBytes(GetMessage.getTypedMessage());
-                    }
-                    catch(System.NullReferenceException){
-                        continue;
-                    }
-
-                    key = SecretBox.GenerateKey();
-                    encrypted = SimplePack.pack(Symmetric.encrypt(message, key));
-                    STDIO.O(encrypted);
-                    foreach (string word in Niceware.ToPassphrase(key)){
-                        Console.Write(word + " ");
-                    }
-                    STDIO.O("");
+                    EncryptWithMnemonic();
+                }
+                else if (choice == 2){
 
                 }
-                else if (choice == encryptMenuOptions.Length){
+                else if (choice == 3){
                     break;
                 }
 
