@@ -29,6 +29,35 @@ namespace sessionTests
         }
 
         [Test]
+        public void TestSessionNoPublicDupes(){
+            byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
+            byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            Session session = new Session(privateK, publicK, true);
+            session.addPublic(newK, getFutureTime(61));
+            try{
+                session.addPublic(newK, getFutureTime(61));
+            }
+            catch(DuplicatePublicKey){return;}
+            Assert.Fail();
+        }
+
+        [Test]
+        public void TestSessionAddPublicInvalidKey(){
+            byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
+            byte[] newK = {3, 5};
+            Session session = new Session(privateK, publicK, true);
+            try{
+                session.addPublic(newK, getFutureTime(61));
+            }
+            catch(InvalidKeyLength){
+                return;
+            }
+            Assert.Fail();
+        }
+
+        [Test]
         public void TestSessionAddPublicInvalidTime(){
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
