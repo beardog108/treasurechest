@@ -3,13 +3,5 @@ Session(private master key, public master peer key, bool strict, int timePerKey)
 List<Ed25519PublicKey> pubkeys
 List<Ed25519PrivKey> privkeys
 
-public:
-encrypt()
-decrypt()
-deleteExpired()
 
-
-byte[] SessionMessage(byte[] data)
-
-getNewKey()
 

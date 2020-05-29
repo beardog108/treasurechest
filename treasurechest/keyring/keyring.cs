@@ -7,7 +7,7 @@ namespace keyring{
 
     public class KeyRing
     {
-        private List<PublicIdentity> publicIdentities;
+        //private List<PublicIdentity> publicIdentities;
         private List<PrivateIdentity> privateIdentities;
 
         public KeyRing(){
