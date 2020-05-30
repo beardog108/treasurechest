@@ -9,7 +9,7 @@ namespace chestcrypto.session.crypto{
 
         public static byte[] encrypt(Session activeSession, byte[] message){
             byte[] publicKey = activeSession.getLatestPublicKey();
-            byte[] privateKey = activeSession.getLatestPrivateKey();
+            byte[] privateKey = activeSession.getOurMasterPrivate();
             return Curve25519.encrypt(privateKey, publicKey, message);
         }
 

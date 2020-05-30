@@ -69,6 +69,9 @@ namespace chestcrypto{
 
             }
 
+            public byte[] getOurMasterPrivate(){return ourMasterPrivateKey;}
+            public byte[] getTheirMasterPublic(){return theirMasterPublicKey;}
+
             public void setMinimumKeyExpireSeconds(int newSeconds){minimumKeyExpireSeconds = newSeconds;}
             public void setMessageDelay(long newDelay){
                 messageDelay = newDelay;

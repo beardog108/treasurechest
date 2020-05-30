@@ -5,6 +5,7 @@ using System.Text;
 using chestcrypto.session;
 using chestcrypto.session.crypto;
 using chestcrypto.exceptions;
+using chestcrypto;
 using Sodium;
 
 namespace sessionTestEncrypt
@@ -20,16 +21,20 @@ namespace sessionTestEncrypt
 
         [Test]
         public void TestEncrypt(){
-            byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
-            byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
-            byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            var pair1 = PublicKeyBox.GenerateKeyPair();
+            byte[] publicK = pair1.PublicKey;
+            byte[] privateK = pair1.PrivateKey;
+            var pair = PublicKeyBox.GenerateKeyPair();
+            byte[] privKey = pair.PrivateKey;
+            byte[] pubKey = pair.PublicKey;
             byte[] message = UTF8Encoding.UTF8.GetBytes("Hello friend");
             Session session = new Session(privateK, publicK, true, 5);
-            session.setMinimumKeyExpireSeconds(1);
-            session.setMessageDelay((long) 1);
-            session.addPublic(newK, getFutureTime(9));
-            session.generatePrivate();
+            session.setMinimumKeyExpireSeconds(10);
+            session.setMessageDelay((long) 25);
+            session.addPublic(pubKey, getFutureTime(100));
             byte[] encrypted = SessionCrypto.encrypt(session, message);
+            byte[] decrypted = Curve25519.decrypt(privKey, publicK, encrypted);
+            Assert.AreEqual(decrypted, message);
         }
 
     }
