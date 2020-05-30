@@ -1,8 +1,9 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using chestcrypto.session;
+using chestcrypto.session.crypto;
 using chestcrypto.exceptions;
 using Sodium;
 
@@ -22,13 +23,13 @@ namespace sessionTestEncrypt
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
             byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
-            byte message = ""
+            byte[] message = UTF8Encoding.UTF8.GetBytes("Hello friend");
             Session session = new Session(privateK, publicK, true, 5);
-            SessionCrypto sessionCrypto = new SessionCrypto(session);
             session.setMinimumKeyExpireSeconds(1);
             session.setMessageDelay((long) 1);
             session.addPublic(newK, getFutureTime(9));
-            sessionCrypto.encrypt()
+            session.generatePrivate();
+            byte[] encrypted = SessionCrypto.encrypt(session, message);
         }
 
     }

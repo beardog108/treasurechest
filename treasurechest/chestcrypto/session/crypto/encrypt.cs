@@ -5,9 +5,9 @@ using chestcrypto;
 
 namespace chestcrypto.session.crypto{
 
-    internal class SessionEncrypt{
+    internal class SessionCrypto{
 
-        public static byte[] Encrypt(Session activeSession, byte[] message){
+        public static byte[] encrypt(Session activeSession, byte[] message){
             byte[] publicKey = activeSession.getLatestPublicKey();
             byte[] privateKey = activeSession.getLatestPrivateKey();
             return Curve25519.encrypt(privateKey, publicKey, message);

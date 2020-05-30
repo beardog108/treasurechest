@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Sodium;
 using chestcrypto.exceptions;
 
 namespace chestcrypto{
@@ -100,6 +101,11 @@ namespace chestcrypto{
                 validateTimestamp(timestamp);
                 if (privateKeyExists(privateKey)){throw new DuplicatePrivateKey();}
                 ourPrivateKeys.Add((timestamp, privateKey));
+            }
+
+            public void generatePrivate(int secsToExpire = 1200){
+                long ts = (long) secsToExpire + getEpoch();
+                addPrivate(PublicKeyBox.GenerateKeyPair().PrivateKey, ts);
             }
 
             public void cleanPublic(){
