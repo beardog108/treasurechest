@@ -14,8 +14,19 @@ namespace sessionTests
         {
         }
 
-        public long getFutureTime(int seconds){
-            return DateTimeOffset.UtcNow.ToUnixTimeSeconds() + (long) seconds;
+        public long getFutureTime(int seconds){return DateTimeOffset.UtcNow.ToUnixTimeSeconds() + (long) seconds;}
+
+        [Test]
+        public void TestSessionGetLatestPublic(){
+            byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
+            byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
+            Session session = new Session(privateK, publicK, true, 5);
+            for (int i = 0; i < 5; i++){
+                session.addPublic(PublicKeyBox.GenerateKeyPair().PublicKey, getFutureTime(630));
+            }
+            session.addPublic(newK, getFutureTime(650));
+            Assert.IsTrue(Enumerable.SequenceEqual(newK, session.getLatestPublicKey()));
         }
 
         [Test]
@@ -23,8 +34,8 @@ namespace sessionTests
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
             byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
-            Session session = new Session(privateK, publicK, true);
-            session.addPublic(newK, getFutureTime(61));
+            Session session = new Session(privateK, publicK, true, 5);
+            session.addPublic(newK, getFutureTime(610));
             Assert.IsTrue(Enumerable.SequenceEqual(newK, session.getLatestPublicKey()));
         }
 
@@ -33,10 +44,10 @@ namespace sessionTests
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
             byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
-            Session session = new Session(privateK, publicK, true);
-            session.addPublic(newK, getFutureTime(61));
+            Session session = new Session(privateK, publicK, true, 5);
+            session.addPublic(newK, getFutureTime(615));
             try{
-                session.addPublic(newK, getFutureTime(61));
+                session.addPublic(newK, getFutureTime(615));
             }
             catch(DuplicatePublicKey){return;}
             Assert.Fail();
@@ -47,7 +58,7 @@ namespace sessionTests
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
             byte[] newK = {3, 5};
-            Session session = new Session(privateK, publicK, true);
+            Session session = new Session(privateK, publicK, true, 5);
             try{
                 session.addPublic(newK, getFutureTime(61));
             }
@@ -62,7 +73,7 @@ namespace sessionTests
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
             byte[] newK = PublicKeyBox.GenerateKeyPair().PublicKey;
-            Session session = new Session(privateK, publicK, true);
+            Session session = new Session(privateK, publicK, true, 5);
             try{
                 session.addPublic(newK, getFutureTime(-1));
             }
@@ -77,11 +88,11 @@ namespace sessionTests
         {
             byte[] publicK = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] privateK = PublicKeyBox.GenerateKeyPair().PrivateKey;
-            Session session = new Session(privateK, publicK, true);
+            Session session = new Session(privateK, publicK, true, 5);
             byte[] invalid = {0, 0, 0};
 
             try{
-                new Session(invalid, publicK, true);
+                new Session(invalid, publicK, true, 5);
             }
             catch(InvalidKeyLength){
                 goto secondAssert;
@@ -89,7 +100,7 @@ namespace sessionTests
             Assert.Fail();
             secondAssert:
                 try{
-                    new Session(privateK, invalid, true);
+                    new Session(privateK, invalid, true, 5);
                 }
                 catch(InvalidKeyLength){
                     return;
