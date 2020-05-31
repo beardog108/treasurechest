@@ -99,6 +99,8 @@ namespace chestcrypto{
                 return key.Item2;
             }
 
+            public (long, byte[])[] getAllPrivateKeys(){return ourPrivateKeys.ToArray();}
+
             public void addPrivate(byte[] privateKey, long timestamp){
                 validateKeyLength(privateKey);
                 validateTimestamp(timestamp);
