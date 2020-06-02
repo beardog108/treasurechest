@@ -94,7 +94,7 @@ namespace chestcrypto{
             public byte[] getLatestPrivateKey(){
                 if (ourPrivateKeys.Count == 0 && strictMode)
                     throw new NoSessionKeyAvailable();
-                var key = ourPrivateKeys[ourPrivateKeys.Count -1];
+                var key = ourPrivateKeys[ourPrivateKeys.Count - 1];
                 validateTimestamp(key.Item1);
                 return key.Item2;
             }
@@ -127,6 +127,9 @@ namespace chestcrypto{
 
             public void cleanPrivate(){
                 // Can't use predicate approach because we want to zero out private keys
+                if (ourPrivateKeys.Count == 0){
+                    return;
+                }
                 List<int> remove = new List<int>();
 
                 for (int i = 0; i < ourPrivateKeys.Count; i++){
@@ -137,7 +140,12 @@ namespace chestcrypto{
                     }
                 }
                 foreach(int i in remove){
-                    ourPrivateKeys.RemoveAt((int) i);
+                    try{
+                        ourPrivateKeys.RemoveAt((int) i);
+                    }
+                    catch(System.ArgumentOutOfRangeException){
+                        ourPrivateKeys.Clear();
+                    }
                 }
             }
 

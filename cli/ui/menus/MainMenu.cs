@@ -47,6 +47,9 @@ namespace treasurechestCLI
                 if (choice == 1){
                     EncryptMenu.enterMenu(strings);
                 }
+                else if (choice == 3){
+                    new KeyRingMenu();
+                }
                 else if (choice == mainMenuOptionsSize){
                     // Exit is final option
                     break;

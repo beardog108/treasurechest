@@ -21,6 +21,8 @@ namespace treasurechestCLI {
                 stringInst.ENCRYPT_MENU_USE_PUBKEY = "Usar clave pública";
                 stringInst.ENTER_MESSAGE_UNTIL_DONE = "Ingrese su mensaje y termine con -q en una nueva línea.";
                 stringInst.PASSPHRASE = "Frase de contraseña";
+                stringInst.ADD_IDENTITY = "Agregar identidad";
+                stringInst.CREATE_IDENTITY = "Crear nueva identidad";
             }
 
         }

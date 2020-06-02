@@ -23,6 +23,8 @@ namespace treasurechestCLI {
             public string ENCRYPT_MENU_USE_PUBKEY;
             public string ENTER_MESSAGE_UNTIL_DONE;
             public string PASSPHRASE;
+            public string ADD_IDENTITY;
+            public string CREATE_IDENTITY;
 
 
             public Strings(){
@@ -48,6 +50,8 @@ namespace treasurechestCLI {
                         ENCRYPT_MENU_USE_PUBKEY = "Use public key";
                         ENTER_MESSAGE_UNTIL_DONE = "Enter your message and finish with -q on a new line.";
                         PASSPHRASE = "Passphrase";
+                        ADD_IDENTITY = "Add identity";
+                        CREATE_IDENTITY = "Create new identity";
                     break;
                 }
 

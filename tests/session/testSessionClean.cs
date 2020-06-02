@@ -26,21 +26,10 @@ namespace sessionPrivateTestsCleaning
             session.setMinimumKeyExpireSeconds(1);
             session.setMessageDelay((long) 1);
             session.addPrivate(newK, getFutureTime(2));
-            bool atLeastOneLoop = false;
-            while(true){
-                try{
-                    if (Enumerable.SequenceEqual(session.getLatestPrivateKey(), newK)){
-                        Thread.Sleep(25); // ms
-                        atLeastOneLoop = true; // key should not be deleted instantly
-                        continue;
-                    }
-                }
-                catch(System.ArgumentOutOfRangeException){
-                    break;
-                }
-                session.cleanPrivate();
-            }
-            Assert.IsTrue(atLeastOneLoop);
+            session.addPrivate(PublicKeyBox.GenerateKeyPair().PrivateKey, getFutureTime(1));
+            Thread.Sleep(3);
+            session.cleanPrivate();
+            Assert.IsTrue(session.getAllPrivateKeys().Length == 0);
         }
 
 
