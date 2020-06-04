@@ -52,12 +52,6 @@ namespace PrivateIndentityTest
             Assert.AreEqual(iden2.getNote(), "test");
         }
 
-        [Test]
-        public void TestPrivateIdenToPublic()
-        {
-
-        }
-
 
     }
 }

@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Sodium;
 
-namespace PrivateIndentityTest
+namespace PublicIndentityTest
 {
     public class Tests
     {
@@ -15,19 +15,15 @@ namespace PrivateIndentityTest
         }
 
         [Test]
-        public void TestPrivateIdentityGetDoublePrivateKey(){
-            byte[] signingKey = PublicKeyAuth.GenerateKeyPair().PrivateKey;
-            byte[] encryptionKey = PublicKeyBox.GenerateKeyPair().PrivateKey;
-
+        public void TestPublicIdentityGetDoublePublicIdentity(){
+            byte[] signingKey = PublicKeyAuth.GenerateKeyPair().PublicKey;
+            byte[] encryptionKey = PublicKeyBox.GenerateKeyPair().PublicKey;
             byte[] combinedKey = new byte[signingKey.Length + encryptionKey.Length];
             Buffer.BlockCopy(signingKey, 0, combinedKey, 0, signingKey.Length);
             Buffer.BlockCopy(encryptionKey, 0, combinedKey, signingKey.Length, encryptionKey.Length);
-
-            DoublePrivateKey combinedLoad = new chestcrypto.DoublePrivateKey(combinedKey);
-
-            PrivateIdentity iden = new PrivateIdentity(combinedLoad, "Picard");
-
-            Assert.IsTrue(Enumerable.SequenceEqual(iden.getPrivateKey().getRawDouble(), combinedLoad.getRawDouble()));
+            DoublePublicKey doubleKey = new DoublePublicKey(combinedKey);
+            PublicIdentity iden = new PublicIdentity(doubleKey, "Picard");
+            Assert.IsTrue(Enumerable.SequenceEqual(iden.getPublicKey().getRawDouble(), combinedKey));
 
         }
 
@@ -52,11 +48,6 @@ namespace PrivateIndentityTest
             Assert.AreEqual(iden2.getNote(), "test");
         }
 
-        [Test]
-        public void TestPrivateIdenToPublic()
-        {
-
-        }
 
 
     }

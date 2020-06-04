@@ -24,7 +24,7 @@ namespace chestcrypto.identity
             comment = note;
         }
 
-        public DoublePublicKey getPrivateKey(){return key;}
+        public DoublePublicKey getPublicKey(){return key;}
         public string getName(){return name;}
         public string getNote(){return comment;}
 
