@@ -12,14 +12,14 @@ namespace chestcrypto.identity
         private string name;
         private string comment; // human's note
 
-        public PublicIdentity(DoublePublicKey doublePrivateKey, string alias){
-            key = doublePrivateKey;
+        public PublicIdentity(DoublePublicKey doublePublicKey, string alias){
+            key = doublePublicKey;
             name = alias;
             comment = "";
         }
 
-        public PublicIdentity(DoublePublicKey doublePrivateKey, string alias, string note){
-            key = doublePrivateKey;
+        public PublicIdentity(DoublePublicKey doublePublicKey, string alias, string note){
+            key = doublePublicKey;
             name = alias;
             comment = note;
         }
