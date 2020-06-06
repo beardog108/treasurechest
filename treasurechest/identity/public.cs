@@ -1,5 +1,3 @@
-using chestcrypto;
-
 namespace chestcrypto.identity
 {
 
@@ -7,7 +5,6 @@ namespace chestcrypto.identity
         /*
         PublicIdentity is a wrapper around a DoublePublicKey providing associated metadata such as alias and note
         */
-
         private DoublePublicKey key;
         private string name;
         private string comment; // human's note
