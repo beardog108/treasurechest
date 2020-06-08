@@ -17,7 +17,7 @@ namespace keyring{
 
         public void addPublicIdentity(PublicIdentity newIden){
             foreach(PublicIdentity iden in publicIdentities){
-                if (Enumerable.ReferenceEquals(iden.getPublicKey(), iden)){
+                if (Enumerable.SequenceEqual(iden.getPublicKey().getRawDouble(), newIden.getPublicKey().getRawDouble())){
                     throw new DuplicateIdentityException();
                 }
             }
@@ -25,7 +25,7 @@ namespace keyring{
         }
         public void addPrivateIdentity(PrivateIdentity newIden){
             foreach(PrivateIdentity iden in privateIdentities){
-                if (Enumerable.ReferenceEquals(iden.getPrivateKey(), iden)){
+                if (Enumerable.SequenceEqual(iden.getPrivateKey().getRawDouble(), newIden.getPrivateKey().getRawDouble())){
                     throw new DuplicateIdentityException();
                 }
             }

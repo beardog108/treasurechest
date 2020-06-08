@@ -6,13 +6,12 @@ namespace chestcrypto.identity
         /*
         PrivateIdentity is a wrapper around a DoublePrivateKey providing associated metadata such as alias and note
         */
-        private DoublePrivateKey key { get; set; }
+        private DoublePrivateKey key;
         public string base85Key { get {
             return getEncodedKey();
         }}
         public string name { get; set; }
         public string comment { get; set; } // human's note
-
 
         public PrivateIdentity(DoublePrivateKey doublePrivateKey, string alias){
             key = doublePrivateKey;
